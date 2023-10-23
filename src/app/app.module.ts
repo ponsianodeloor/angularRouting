@@ -9,11 +9,21 @@ import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { InfoComponent } from './contact/info/info.component';
+import { FormContactComponent } from './contact/form-contact/form-contact.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
-  {path: 'contact', component: ContactComponent},
+  {
+    path: 'contact',
+    component: ContactComponent,
+    children: [
+      {path: 'info', component: InfoComponent},
+      {path: 'form-contact', component: FormContactComponent},
+      {path: '', redirectTo: 'info', pathMatch: 'full'},
+    ]
+  },
   {path: 'product', component: ProductsComponent},
   {path: 'product/:product/:encryptId', component: ProductDetailComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -28,7 +38,9 @@ const routes: Routes = [
     ContactComponent,
     PageNotFoundComponent,
     ProductsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    InfoComponent,
+    FormContactComponent,
   ],
   imports: [
     BrowserModule,
