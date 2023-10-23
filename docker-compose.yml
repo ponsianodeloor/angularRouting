@@ -1,0 +1,28 @@
+version: '3'
+services:
+  angular-app:
+    image: node:18.10
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "4200:4200"
+    command: npm start
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - angular-app-dependencies
+    networks:
+      - angular-app-net
+
+  angular-app-dependencies:
+    image: node:18.10
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: npm install
+    networks:
+      - angular-app-net
+
+networks:
+  angular-app-net:
