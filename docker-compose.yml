@@ -20,7 +20,7 @@ services:
     working_dir: /app
     volumes:
       - ./:/app
-    command: npm install
+    command: npm install -g @angular/cli
     networks:
       - angular-app-net
 
